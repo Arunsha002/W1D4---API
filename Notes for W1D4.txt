@@ -87,8 +87,59 @@ Setup & Examples
    http://127.0.0.1:8001/add?a=5&b=3 → {"result": 8}
    http://127.0.0.1:8001/divide?a=9&b=3 → {"result": 3}
 
+4. Streamlit Basics
+-------------------
+Streamlit is a Python framework for building interactive web apps quickly.
 
-4. Streamlit
+Setup:
+   pip install streamlit
 
+Run:
+   streamlit run filename.py
 
+Examples:
 
+1. stfirst.py
+   import streamlit as st
+   st.title("Hi here is your Streamlit application")
+
+   Run:
+   streamlit run stfirst.py
+   → Opens at http://localhost:8501
+
+2. stsecond.py
+   import streamlit as st
+   import time
+
+   st.title("வணக்கம் இறைமகிழன்")
+   st.write("கீழே உள்ள வார்த்தைகளில் ஏதேனும் ஒன்றை கிளிக் செய்யவும்:")
+
+   relations = {
+       "அம்மா": "திவ்யா",
+       "அப்பா": "அருண்",
+       "அண்ணா": "ஆரோன்",
+       "தம்பி": "நிலன்",
+       "பாட்டி": "மீனா",
+       "அப்பாத்தாத்தா": "சௌந்தர்",
+       "பெரியப்பா": "ஆனந்த்",
+       "அம்மம்மா": "சகிலா",
+       "அம்மாத்தாத்தா": "செல்வம்",
+       "மாமா": "தமிழ்",
+       "அத்தை": "பிரிசில்லா"
+   }
+
+   cols = st.columns(4)
+   popup = st.empty()
+   i = 0
+   for relation, name in relations.items():
+       col = cols[i % 4]
+       if col.button(relation):
+           popup.success(f"{relation} - {name}")
+           time.sleep(2)
+           popup.empty()
+       i += 1
+
+Notes:
+- Streamlit apps run locally on port 8501 by default.
+- Use st.title, st.write, st.button, st.success, st.empty for UI.
+- Supports Tamil and other languages directly in text.
