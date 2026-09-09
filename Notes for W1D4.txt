@@ -86,3 +86,9 @@ Setup & Examples
    Test in browser or Postman:
    http://127.0.0.1:8001/add?a=5&b=3 → {"result": 8}
    http://127.0.0.1:8001/divide?a=9&b=3 → {"result": 3}
+
+
+4. Streamlit
+
+
+
