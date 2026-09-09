@@ -1,0 +1,43 @@
+API
+
+It is a backend application which acts as an interface between frontend and the business logic
+
+Rest API - This is rest API Friendly
+GraphQL
+Soap 
+RPC ( Remote Procedure Call) - This is used for MCP
+
+Rest API and Its methods
+
+4 important http methods for API
+
+1. Post - Create the data to the server
+2. Get - Read the data from the server
+3. Put - Update the data to the server
+4. Delete - To delete the data from the server
+
+
+All these are the request and the response will be in a json format
+
+200 series - success messages
+300 series - redirect issues
+400 series - Client side issue
+500 series - server side issue
+
+
+FastAPI - Things to know
+
+1. endpoints
+2. we will create the API with the end points
+
+Need to install
+
+1. fast api and uvicorn
+2. write a simple code to execute start a localhost that should respond with hello world if it gets any request
+
+
+
+
+
+
+
