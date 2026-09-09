@@ -1,43 +1,88 @@
-API
+API Basics
+----------
+API (Application Programming Interface): A backend application that acts as a bridge between the frontend (UI) and the business logic (server-side rules and data).
 
-It is a backend application which acts as an interface between frontend and the business logic
+Types of APIs:
+- REST API: Most common, resource-oriented, uses HTTP methods, responses usually in JSON.
+- GraphQL: Flexible queries, lets clients specify exactly what data they need.
+- SOAP: XML-based, older but still used in enterprise systems.
+- RPC (Remote Procedure Call): Directly invokes functions/methods on a remote server. Modern variant: gRPC.
 
-Rest API - This is rest API Friendly
-GraphQL
-Soap 
-RPC ( Remote Procedure Call) - This is used for MCP
+REST API & HTTP Methods
+-----------------------
+The four core methods (CRUD operations):
+1. POST   → Create new data on the server
+2. GET    → Read or fetch data from the server
+3. PUT    → Update existing data on the server
+4. DELETE → Remove data from the server
 
-Rest API and Its methods
+Requests and responses are usually in JSON format.
 
-4 important http methods for API
+HTTP Status Codes
+-----------------
+- 200 series (Success): Request completed successfully (e.g., 200 OK, 201 Created).
+- 300 series (Redirection): Resource moved or requires further action (e.g., 301 Moved Permanently).
+- 400 series (Client Errors): Problem with the request (e.g., 400 Bad Request, 404 Not Found).
+- 500 series (Server Errors): Problem on the server side (e.g., 500 Internal Server Error).
 
-1. Post - Create the data to the server
-2. Get - Read the data from the server
-3. Put - Update the data to the server
-4. Delete - To delete the data from the server
+FastAPI Essentials
+------------------
+- Endpoints: URLs that map to functions. Example: /add → performs addition.
+- Why FastAPI?
+  * Very fast (built on Starlette + Pydantic).
+  * Automatic validation of request data.
+  * Interactive API docs at /docs (Swagger UI) and /redoc.
 
+Setup & Examples
+----------------
+1. Install packages:
+   pip install fastapi uvicorn
 
-All these are the request and the response will be in a json format
+2. Hello World API (firstapi.py):
+   from fastapi import FastAPI
+   import uvicorn
 
-200 series - success messages
-300 series - redirect issues
-400 series - Client side issue
-500 series - server side issue
+   app = FastAPI()
 
+   @app.get("/")
+   async def root():
+       return {"message": "Hello World"}
 
-FastAPI - Things to know
+   if __name__ == "__main__":
+       uvicorn.run("firstapi:app", host="127.0.0.1", port=8000, reload=True)
 
-1. endpoints
-2. we will create the API with the end points
+   Run:
+   uvicorn firstapi:app --reload --host 127.0.0.1 --port 8000
+   Test:
+   http://127.0.0.1:8000/ → {"message": "Hello World"}
 
-Need to install
+3. Calculator API (calculatorwithapi.py):
+   from fastapi import FastAPI
+   import uvicorn
 
-1. fast api and uvicorn
-2. write a simple code to execute start a localhost that should respond with hello world if it gets any request
+   app = FastAPI()
 
+   @app.get("/add")
+   async def add(a: float, b: float):
+       return {"result": a + b}
 
+   @app.get("/subtract")
+   async def subtract(a: float, b: float):
+       return {"result": a - b}
 
+   @app.get("/multiply")
+   async def multiply(a: float, b: float):
+       return {"result": a * b}
 
+   @app.get("/divide")
+   async def divide(a: float, b: float):
+       if b == 0:
+           return {"error": "Division by zero is not allowed"}
+       return {"result": a / b}
 
+   if __name__ == "__main__":
+       uvicorn.run("calculatorwithapi:app", host="127.0.0.1", port=8001, reload=True)
 
-
+   Test in browser or Postman:
+   http://127.0.0.1:8001/add?a=5&b=3 → {"result": 8}
+   http://127.0.0.1:8001/divide?a=9&b=3 → {"result": 3}
